@@ -56,8 +56,7 @@ public class ClientRepository implements IRepository<Client> {
     }
 
     @Override
-    public Client delete(int i) {
-        return null;
+    public void delete(int i) {
     }
 
     @Override

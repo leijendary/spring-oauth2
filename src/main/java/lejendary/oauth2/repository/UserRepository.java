@@ -56,8 +56,8 @@ public class UserRepository implements IRepository<User> {
     }
 
     @Override
-    public User delete(int i) {
-        return null;
+    public void delete(int i) {
+
     }
 
     @Override

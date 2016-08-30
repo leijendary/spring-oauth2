@@ -1,5 +1,6 @@
 package lejendary.oauth2.repository;
 
+import com.sun.xml.internal.bind.v2.model.core.ID;
 import org.hibernate.Criteria;
 
 import java.util.List;
@@ -14,7 +15,7 @@ interface IRepository<T> {
 
     Criteria criteria();
 
-    T get(int i);
+    T get(ID i);
 
     T get(String s);
 
@@ -22,7 +23,7 @@ interface IRepository<T> {
 
     T update(T t);
 
-    T delete(int i);
+    void delete(int i);
 
     List<T> list(String searchQuery, int pageNumber, String sortOrder, int limit);
 
