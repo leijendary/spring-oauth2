@@ -7,6 +7,7 @@ import lejendary.oauth2.util.AppConstants;
 import lejendary.oauth2.web.filter.CachingHttpHeadersFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
@@ -75,14 +76,14 @@ public class WebConfiguration extends WebMvcConfigurerAdapter implements Servlet
      * Initializes the caching HTTP Headers Filter.
      */
     private void initCachingHttpHeadersFilter(ServletContext servletContext,
-                                              EnumSet<DispatcherType> disps) {
+                                              EnumSet<DispatcherType> dispatcherTypes) {
         log.debug("Registering Caching HTTP Headers Filter");
         FilterRegistration.Dynamic cachingHttpHeadersFilter =
                 servletContext.addFilter("cachingHttpHeadersFilter",
                         new CachingHttpHeadersFilter(oAuth2Properties));
 
-        cachingHttpHeadersFilter.addMappingForUrlPatterns(disps, true, "/content/*");
-        cachingHttpHeadersFilter.addMappingForUrlPatterns(disps, true, "/app/*");
+        cachingHttpHeadersFilter.addMappingForUrlPatterns(dispatcherTypes, true, "/css/**");
+        cachingHttpHeadersFilter.addMappingForUrlPatterns(dispatcherTypes, true, "/app/**");
         cachingHttpHeadersFilter.setAsyncSupported(true);
     }
 
@@ -107,7 +108,7 @@ public class WebConfiguration extends WebMvcConfigurerAdapter implements Servlet
         ServletRegistration.Dynamic metricsAdminServlet =
                 servletContext.addServlet("metricsServlet", new MetricsServlet());
 
-        metricsAdminServlet.addMapping("/management/jhipster/metrics/*");
+        metricsAdminServlet.addMapping("/management/oauth2/metrics/*");
         metricsAdminServlet.setAsyncSupported(true);
         metricsAdminServlet.setLoadOnStartup(2);
     }
@@ -119,7 +120,6 @@ public class WebConfiguration extends WebMvcConfigurerAdapter implements Servlet
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = oAuth2Properties.getCors();
         source.registerCorsConfiguration("/api/**", config);
-        source.registerCorsConfiguration("/v2/api-docs", config);
         source.registerCorsConfiguration("/oauth/**", config);
         return new CorsFilter(source);
     }
