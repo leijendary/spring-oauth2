@@ -88,6 +88,10 @@
             <artifactId>spring-orm</artifactId>
             <version>${spring-orm.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-jwt</artifactId>
+        </dependency>
 
         <!-- Miscellaneous Dependencies -->
         <dependency>

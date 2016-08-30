@@ -16,11 +16,10 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
-import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 import javax.inject.Inject;
-import javax.sql.DataSource;
 
 /**
  * @author Jonathan Leijendekker
@@ -49,19 +48,19 @@ public class OAuth2ServerConfiguration {
             http
                     .exceptionHandling()
                     .authenticationEntryPoint(http401UnauthorizedEntryPoint)
-                    .and()
+                .and()
                     .logout()
                     .logoutUrl("/api/logout")
                     .logoutSuccessHandler(ajaxLogoutSuccessHandler)
-                    .and()
+                .and()
                     .csrf()
                     .disable()
                     .headers()
                     .frameOptions().disable()
-                    .and()
+                .and()
                     .sessionManagement()
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                    .and()
+                .and()
                     .authorizeRequests()
                     .antMatchers(HttpMethod.OPTIONS, "/**").permitAll();
         }
@@ -71,26 +70,30 @@ public class OAuth2ServerConfiguration {
     @EnableAuthorizationServer
     protected static class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
 
-        private final DataSource dataSource;
         private final AuthenticationManager authenticationManager;
         private final ClientService clientService;
 
         @Inject
-        public AuthorizationServerConfiguration(DataSource dataSource, AuthenticationManager authenticationManager, ClientService clientService) {
-            this.dataSource = dataSource;
+        public AuthorizationServerConfiguration(AuthenticationManager authenticationManager, ClientService clientService) {
             this.authenticationManager = authenticationManager;
             this.clientService = clientService;
         }
 
         @Bean
-        public TokenStore tokenStore() {
-            return new JdbcTokenStore(dataSource);
+        public JwtAccessTokenConverter jwtAccessTokenConverter() {
+            return new JwtAccessTokenConverter();
+        }
+
+        @Bean
+        public JwtTokenStore jwtTokenStore() throws Exception {
+            return new JwtTokenStore(jwtAccessTokenConverter());
         }
 
         @Override
         public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
             endpoints
-                    .tokenStore(tokenStore())
+                    .tokenStore(jwtTokenStore())
+                    .accessTokenConverter(jwtAccessTokenConverter())
                     .authenticationManager(authenticationManager);
         }
 
@@ -98,7 +101,8 @@ public class OAuth2ServerConfiguration {
         public void configure(AuthorizationServerSecurityConfigurer authServer) throws Exception {
             authServer
                     .allowFormAuthenticationForClients()
-                    .checkTokenAccess("permitAll()");
+                    .checkTokenAccess("permitAll()")
+                    .tokenKeyAccess("permitAll()");
         }
 
         @Override

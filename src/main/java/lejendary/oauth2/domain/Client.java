@@ -86,7 +86,10 @@ public class Client extends AbstractAuditingEntity implements ClientDetails {
 
     @Override
     public Set<String> getAuthorizedGrantTypes() {
-        return Collections.singleton("password");
+        Set<String> grantTypes = new HashSet<>();
+        grantTypes.add("password");
+        grantTypes.add("refresh_token");
+        return grantTypes;
     }
 
     @Override
