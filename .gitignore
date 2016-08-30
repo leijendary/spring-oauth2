@@ -38,3 +38,9 @@ jspm_packages
 
 # IDEA
 .idea
+
+# Maven
+.mvn
+
+# Build
+target
