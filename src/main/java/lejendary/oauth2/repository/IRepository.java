@@ -1,6 +1,5 @@
 package lejendary.oauth2.repository;
 
-import com.sun.xml.internal.bind.v2.model.core.ID;
 import org.hibernate.Criteria;
 
 import java.util.List;
@@ -15,7 +14,7 @@ interface IRepository<T> {
 
     Criteria criteria();
 
-    T get(ID i);
+    T get(int i);
 
     T get(String s);
 
