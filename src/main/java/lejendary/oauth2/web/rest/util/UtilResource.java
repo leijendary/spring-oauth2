@@ -1,6 +1,7 @@
 package lejendary.oauth2.web.rest.util;
 
 import lejendary.oauth2.repository.util.UtilRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

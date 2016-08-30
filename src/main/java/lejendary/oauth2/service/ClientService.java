@@ -1,6 +1,7 @@
 package lejendary.oauth2.service;
 
 import lejendary.oauth2.repository.ClientRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.ClientRegistrationException;

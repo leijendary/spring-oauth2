@@ -1,9 +1,11 @@
 package lejendary.oauth2.repository;
 
 import lejendary.oauth2.domain.Client;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -25,14 +27,19 @@ public class ClientRepository implements IRepository<Client> {
     }
 
     @Override
+    public Criteria criteria() {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createCriteria(Client.class);
+    }
+
+    @Override
     public Client get(int i) {
         return null;
     }
 
     @Override
     public Client get(String s) {
-        Session session = sessionFactory.getCurrentSession();
-        return (Client) session.createCriteria(Client.class)
+        return (Client) criteria()
                 .add(Restrictions.eq("clientId", s))
                 .setMaxResults(1)
                 .uniqueResult();

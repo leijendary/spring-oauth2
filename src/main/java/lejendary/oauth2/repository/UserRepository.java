@@ -1,9 +1,11 @@
 package lejendary.oauth2.repository;
 
 import lejendary.oauth2.domain.User;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -25,14 +27,19 @@ public class UserRepository implements IRepository<User> {
     }
 
     @Override
+    public Criteria criteria() {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createCriteria(User.class);
+    }
+
+    @Override
     public User get(int i) {
         return null;
     }
 
     @Override
     public User get(String s) {
-        Session session = sessionFactory.getCurrentSession();
-        return (User) session.createCriteria(User.class)
+        return (User) criteria()
                 .add(Restrictions.eq("username", s))
                 .setMaxResults(1)
                 .uniqueResult();

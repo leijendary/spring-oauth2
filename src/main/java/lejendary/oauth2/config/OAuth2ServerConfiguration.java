@@ -3,6 +3,7 @@ package lejendary.oauth2.config;
 import lejendary.oauth2.security.AjaxLogoutSuccessHandler;
 import lejendary.oauth2.security.Http401UnauthorizedEntryPoint;
 import lejendary.oauth2.service.ClientService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;

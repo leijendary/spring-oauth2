@@ -1,5 +1,7 @@
 package lejendary.oauth2.repository;
 
+import org.hibernate.Criteria;
+
 import java.util.List;
 
 /**
@@ -8,7 +10,9 @@ import java.util.List;
  *         Time: 5:02 PM
  */
 
-public interface IRepository<T> {
+interface IRepository<T> {
+
+    Criteria criteria();
 
     T get(int i);
 
