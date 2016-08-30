@@ -1,0 +1,89 @@
+server:
+    server-header: OAuth2 v@version@
+    session:
+        timeout: 10800
+    compression:
+            enabled: true
+            mime-types: text/html, text/xml, text/plain, text/css, application/javascript, application/json
+    port: 8000
+
+spring:
+    aop:
+        proxy-target-class: true
+    application:
+        name: OAuth2 v@version@
+    profiles:
+        active: #spring.profiles.active#
+    jpa:
+        properties:
+            hibernate.dialect: org.hibernate.dialect.MySQLDialect
+            hibernate.show_sql: true
+            hibernate.format_sql: true
+            hibernate.hbm2ddl.auto: update
+            hibernate.hbm2ddl.import_files: classpath:datasource/import.sql
+            hibernate.cache.use_second_level_cache: true
+            hibernate.cache.use_query_cache: false
+            hibernate.generate_statistics: true
+            hibernate.cache.region.factory_class: org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
+    mvc:
+        favicon:
+            enabled: false
+
+liquibase:
+    contexts: dev
+
+security:
+    basic:
+        enabled: false
+
+logging:
+    level:
+        org.springframework.aop.framework.CglibAopProxy: ERROR
+        org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping: ERROR
+
+management:
+    add-application-context-header: false
+
+multipart:
+    max-request-size:
+    max-file-size:
+
+oauth2:
+    http:
+        cache: # Used by the CachingHttpHeadersFilter
+            timeToLiveInDays: 1461
+    cache:
+        timeToLiveSeconds: 3600
+        ehcache:
+            maxBytesLocalHeap: 16M
+    async:
+        corePoolSize: 2
+        maxPoolSize: 50
+        queueCapacity: 10000
+    #cors: #By default CORS are not enabled. Uncomment to enable.
+            #allowed-origins: "*"
+            #allowed-methods: GET, PUT, POST, DELETE, OPTIONS
+            #allowed-headers: "*"
+            #exposed-headers:
+            #allow-credentials: true
+            #max-age: 1800
+    metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
+        jmx.enabled: true
+        spark:
+            enabled: false
+            host: localhost
+            port: 9999
+        graphite:
+            enabled: false
+            host: localhost
+            port: 2003
+            prefix: OAuth2Application
+        logs: # Reports Dropwizard metrics in the logs
+            enabled: false
+            reportFrequency: 60 # in seconds
+    logging:
+        logstash: # Forward logs to logstash over a socket, used by LoggingConfiguration
+            enabled: false
+            host: localhost
+            port: 5000
+            queueSize: 512

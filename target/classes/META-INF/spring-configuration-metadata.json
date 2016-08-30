@@ -1,0 +1,41 @@
+{
+  "groups": [
+    {
+      "name": "oauth2",
+      "type": "lejendary.oauth2.config.OAuth2Properties",
+      "sourceType": "lejendary.oauth2.config.OAuth2Properties"
+    },
+    {
+      "name": "oauth2.async",
+      "type": "lejendary.oauth2.config.OAuth2Properties$Async",
+      "sourceType": "lejendary.oauth2.config.OAuth2Properties"
+    },
+    {
+      "name": "oauth2.cache",
+      "type": "lejendary.oauth2.config.OAuth2Properties$Cache",
+      "sourceType": "lejendary.oauth2.config.OAuth2Properties"
+    },
+    {
+      "name": "oauth2.http",
+      "type": "lejendary.oauth2.config.OAuth2Properties$Http",
+      "sourceType": "lejendary.oauth2.config.OAuth2Properties"
+    },
+    {
+      "name": "oauth2.logging",
+      "type": "lejendary.oauth2.config.OAuth2Properties$Logging",
+      "sourceType": "lejendary.oauth2.config.OAuth2Properties"
+    },
+    {
+      "name": "oauth2.metrics",
+      "type": "lejendary.oauth2.config.OAuth2Properties$Metrics",
+      "sourceType": "lejendary.oauth2.config.OAuth2Properties"
+    },
+    {
+      "name": "oauth2.security",
+      "type": "lejendary.oauth2.config.OAuth2Properties$Security",
+      "sourceType": "lejendary.oauth2.config.OAuth2Properties"
+    }
+  ],
+  "properties": [],
+  "hints": []
+}
