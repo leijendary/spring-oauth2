@@ -13,7 +13,6 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import javax.inject.Inject;
 import javax.sql.DataSource;
 import java.util.Properties;
 
@@ -31,7 +30,7 @@ public class HibernateConfiguration {
     private final Environment environment;
     private final DataSource dataSource;
 
-    @Inject
+    @Autowired
     public HibernateConfiguration(Environment environment, DataSource dataSource) {
         this.environment = environment;
         this.dataSource = dataSource;
@@ -48,7 +47,7 @@ public class HibernateConfiguration {
     }
 
     @Bean
-    @Inject
+    @Autowired
     public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
         HibernateTransactionManager hibernateTransactionManager = new HibernateTransactionManager();
         hibernateTransactionManager.setSessionFactory(sessionFactory);

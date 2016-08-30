@@ -16,8 +16,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.data.repository.query.SecurityEvaluationContextExtension;
 
-import javax.inject.Inject;
-
 /**
  * @author Jonathan Leijendekker
  *         Date: 8/23/2016
@@ -31,7 +29,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final UserService userDetailsService;
 
-    @Inject
+    @Autowired
     public SecurityConfiguration(UserService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
@@ -41,7 +39,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-    @Inject
+    @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
                 .userDetailsService(userDetailsService)

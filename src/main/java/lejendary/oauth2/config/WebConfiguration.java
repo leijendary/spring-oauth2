@@ -22,7 +22,6 @@ import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import javax.inject.Inject;
 import javax.servlet.*;
 import java.util.Arrays;
 import java.util.EnumSet;
@@ -42,7 +41,7 @@ public class WebConfiguration extends WebMvcConfigurerAdapter implements Servlet
     private final OAuth2Properties oAuth2Properties;
     private final MetricRegistry metricRegistry;
 
-    @Inject
+    @Autowired
     public WebConfiguration(OAuth2Properties oAuth2Properties, Environment environment, MetricRegistry metricRegistry) {
         this.oAuth2Properties = oAuth2Properties;
         this.environment = environment;

@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.inject.Inject;
 import java.util.Date;
 
 /**
@@ -21,7 +20,7 @@ public class UtilResource {
 
     private final UtilRepository utilRepository;
 
-    @Inject
+    @Autowired
     public UtilResource(UtilRepository utilRepository) {
         this.utilRepository = utilRepository;
     }

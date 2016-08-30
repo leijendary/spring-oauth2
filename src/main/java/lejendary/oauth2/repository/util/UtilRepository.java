@@ -4,7 +4,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
-import javax.inject.Inject;
 import java.util.Date;
 
 /**
@@ -18,7 +17,7 @@ public class UtilRepository {
 
     private final SessionFactory sessionFactory;
 
-    @Inject
+    @Autowired
     public UtilRepository(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }

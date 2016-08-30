@@ -7,7 +7,6 @@ import org.springframework.security.oauth2.provider.ClientRegistrationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.inject.Inject;
 import java.util.Optional;
 
 /**
@@ -22,7 +21,7 @@ public class ClientService implements ClientDetailsService {
 
     private final ClientRepository clientRepository;
 
-    @Inject
+    @Autowired
     public ClientService(ClientRepository clientRepository) {
         this.clientRepository = clientRepository;
     }

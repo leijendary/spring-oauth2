@@ -19,8 +19,6 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
-import javax.inject.Inject;
-
 /**
  * @author Jonathan Leijendekker
  *         Date: 8/23/2016
@@ -37,7 +35,7 @@ public class OAuth2ServerConfiguration {
         private final Http401UnauthorizedEntryPoint http401UnauthorizedEntryPoint;
         private final AjaxLogoutSuccessHandler ajaxLogoutSuccessHandler;
 
-        @Inject
+        @Autowired
         public ResourceServerConfiguration(AjaxLogoutSuccessHandler ajaxLogoutSuccessHandler, Http401UnauthorizedEntryPoint http401UnauthorizedEntryPoint) {
             this.ajaxLogoutSuccessHandler = ajaxLogoutSuccessHandler;
             this.http401UnauthorizedEntryPoint = http401UnauthorizedEntryPoint;
@@ -73,7 +71,7 @@ public class OAuth2ServerConfiguration {
         private final AuthenticationManager authenticationManager;
         private final ClientService clientService;
 
-        @Inject
+        @Autowired
         public AuthorizationServerConfiguration(AuthenticationManager authenticationManager, ClientService clientService) {
             this.authenticationManager = authenticationManager;
             this.clientService = clientService;

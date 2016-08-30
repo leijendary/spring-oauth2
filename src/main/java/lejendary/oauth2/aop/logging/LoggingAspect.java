@@ -9,9 +9,9 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 
-import javax.inject.Inject;
 import java.util.Arrays;
 
 /**
@@ -23,12 +23,12 @@ public class LoggingAspect {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
     private final Environment environment;
 
-    @Inject
+    @Autowired
     public LoggingAspect(Environment environment) {
         this.environment = environment;
     }
 
-    @Pointcut("within(lejendary.oauth2.repository..*) || within(lejendary.oauth2.service..*) || within(lejendary.oauth2.web.rest..*)")
+    @Pointcut("within(lejendary.oauth2.repository.*) || within(lejendary.oauth2.service.*) || within(lejendary.oauth2.web.rest.*)")
     public void loggingPointcut() {
     }
 

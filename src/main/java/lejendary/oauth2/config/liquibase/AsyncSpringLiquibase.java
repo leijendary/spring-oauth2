@@ -10,8 +10,6 @@ import org.springframework.core.env.Environment;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.util.StopWatch;
 
-import javax.inject.Inject;
-
 /**
  * Specific liquibase.integration.spring.SpringLiquibase that will update the database asynchronously.
  * <p>
@@ -33,7 +31,7 @@ public class AsyncSpringLiquibase extends SpringLiquibase {
     private final TaskExecutor taskExecutor;
     private final Environment environment;
 
-    @Inject
+    @Autowired
     public AsyncSpringLiquibase(Environment environment, @Qualifier("taskExecutor") TaskExecutor taskExecutor) {
         this.environment = environment;
         this.taskExecutor = taskExecutor;

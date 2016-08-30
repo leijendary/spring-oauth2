@@ -7,7 +7,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.inject.Inject;
 import java.util.Optional;
 
 /**
@@ -22,7 +21,7 @@ public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
-    @Inject
+    @Autowired
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }

@@ -6,7 +6,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-import javax.inject.Inject;
 import java.util.List;
 
 /**
@@ -20,7 +19,7 @@ public class UserRepository implements IRepository<User> {
 
     private final SessionFactory sessionFactory;
 
-    @Inject
+    @Autowired
     public UserRepository(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }

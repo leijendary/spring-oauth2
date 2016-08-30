@@ -4,6 +4,7 @@ import lejendary.oauth2.config.liquibase.AsyncSpringLiquibase;
 import liquibase.integration.spring.SpringLiquibase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
@@ -14,7 +15,6 @@ import org.springframework.core.env.Environment;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
-import javax.inject.Inject;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -34,7 +34,7 @@ public class DatabaseConfiguration {
     private final Environment environment;
     private final TaskExecutor taskExecutor;
 
-    @Inject
+    @Autowired
     public DatabaseConfiguration(Environment environment, @Qualifier("taskExecutor") TaskExecutor taskExecutor) {
         this.environment = environment;
         this.taskExecutor = taskExecutor;

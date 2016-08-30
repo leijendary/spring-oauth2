@@ -8,7 +8,6 @@ import org.springframework.security.web.authentication.AbstractAuthenticationTar
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.stereotype.Component;
 
-import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,7 +23,7 @@ public class AjaxLogoutSuccessHandler extends AbstractAuthenticationTargetUrlReq
     private static final String BEARER_AUTHENTICATION = "Bearer ";
     private final TokenStore tokenStore;
 
-    @Inject
+    @Autowired
     public AjaxLogoutSuccessHandler(TokenStore tokenStore) {
         this.tokenStore = tokenStore;
     }

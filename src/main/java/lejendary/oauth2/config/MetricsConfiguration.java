@@ -13,12 +13,12 @@ import com.ryantenney.metrics.spring.config.annotation.MetricsConfigurerAdapter;
 import fr.ippon.spark.metrics.SparkReporter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
-import javax.inject.Inject;
 import java.lang.management.ManagementFactory;
 import java.net.InetSocketAddress;
 import java.util.concurrent.TimeUnit;
@@ -38,7 +38,7 @@ public class MetricsConfiguration extends MetricsConfigurerAdapter {
     private HealthCheckRegistry healthCheckRegistry = new HealthCheckRegistry();
     private final OAuth2Properties oAuth2Properties;
 
-    @Inject
+    @Autowired
     public MetricsConfiguration(OAuth2Properties oAuth2Properties) {
         this.oAuth2Properties = oAuth2Properties;
     }
@@ -88,7 +88,7 @@ public class MetricsConfiguration extends MetricsConfigurerAdapter {
         private final MetricRegistry metricRegistry;
         private final OAuth2Properties oAuth2Properties;
 
-        @Inject
+        @Autowired
         public GraphiteRegistry(OAuth2Properties oAuth2Properties, MetricRegistry metricRegistry) {
             this.oAuth2Properties = oAuth2Properties;
             this.metricRegistry = metricRegistry;
@@ -120,7 +120,7 @@ public class MetricsConfiguration extends MetricsConfigurerAdapter {
         private final MetricRegistry metricRegistry;
         private final OAuth2Properties oAuth2Properties;
 
-        @Inject
+        @Autowired
         public SparkRegistry(MetricRegistry metricRegistry, OAuth2Properties oAuth2Properties) {
             this.metricRegistry = metricRegistry;
             this.oAuth2Properties = oAuth2Properties;
